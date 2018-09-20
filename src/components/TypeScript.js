@@ -1,4 +1,5 @@
 let JavaScript = require('./JavaScript');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 class TypeScript extends JavaScript {
     /**
@@ -12,7 +13,7 @@ class TypeScript extends JavaScript {
      * Required dependencies for the component.
      */
     dependencies() {
-        return ['ts-loader', 'typescript'].concat(super.dependencies());
+        return ['cache-loader', 'ts-loader', 'typescript'].concat(super.dependencies());
     }
 
     /**
@@ -21,10 +22,14 @@ class TypeScript extends JavaScript {
     webpackRules() {
         return [].concat(super.webpackRules(), {
             test: /\.tsx?$/,
-            loader: 'ts-loader',
+            use: [
+                'cache-loader',
+                'ts-loader'
+            ],
             exclude: /node_modules/,
             options: {
-                appendTsSuffixTo: [/\.vue$/]
+                appendTsSuffixTo: [/\.vue$/],
+                transpileOnly: true
             }
         });
     }
@@ -36,6 +41,8 @@ class TypeScript extends JavaScript {
      */
     webpackConfig(config) {
         super.webpackConfig(config);
+
+        config.plugins.push(new ForkTsCheckerWebpackPlugin());
 
         config.resolve.extensions.push('.ts', '.tsx');
         config.resolve.alias['vue$'] = 'vue/dist/vue.esm.js';

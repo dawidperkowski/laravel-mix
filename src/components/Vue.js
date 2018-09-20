@@ -17,9 +17,16 @@ class Vue {
      * @param {Object} webpackConfig
      */
     webpackConfig(webpackConfig) {
+        if(webpackConfig.plugins.filter((plugin)=> plugin instanceof VueLoaderPlugin).length !== 0) {
+            console.log('Skipping Vue webpackConfig');
+            return;
+        }
         webpackConfig.module.rules.push({
             test: /\.vue$/,
-            loader: 'vue-loader'
+            use: [
+                'cache-loader',
+                'vue-loader'
+            ]
         });
 
         this.vueLoaders(webpackConfig);

@@ -69,6 +69,7 @@ class JavaScript {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
+                    'cache-loader',
                     {
                         loader: 'babel-loader',
                         options: Config.babel()

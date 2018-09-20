@@ -14,7 +14,7 @@ class Css extends AutomaticComponent {
             {
                 test: /\.s[ac]ss$/,
                 exclude: this.excludePathsFor('sass'),
-                loaders: ['style-loader', 'css-loader', 'sass-loader']
+                loaders: ['cache-loader', 'style-loader', 'css-loader', 'sass-loader']
             },
 
             {
