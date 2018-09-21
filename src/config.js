@@ -148,27 +148,28 @@ module.exports = function() {
                 options = webpackMerge.smart(options, this.babelConfig);
             }
 
+            const production = process.env.NODE_ENV === 'production' || process.argv.includes('-p');
+
             return webpackMerge.smart(
                 {
                     cacheDirectory: true,
                     presets: [
                         [
-                            'env',
+                            '@babel/preset-env',
                             {
+                                forceAllTransforms: production,
                                 modules: false,
                                 targets: {
                                     browsers: ['> 2%'],
-                                    uglify: true
                                 }
                             }
                         ]
                     ],
                     plugins: [
-                        'transform-object-rest-spread',
+                        '@babel/plugin-syntax-object-rest-spread',
                         [
-                            'transform-runtime',
+                            '@babel/plugin-transform-runtime',
                             {
-                                polyfill: false,
                                 helpers: false
                             }
                         ]

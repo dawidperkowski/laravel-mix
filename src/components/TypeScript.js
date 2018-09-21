@@ -20,18 +20,26 @@ class TypeScript extends JavaScript {
      * webpack rules to be appended to the master config.
      */
     webpackRules() {
-        return [].concat(super.webpackRules(), {
-            test: /\.tsx?$/,
-            use: [
-                'cache-loader',
-                'ts-loader'
-            ],
-            exclude: /node_modules/,
+      return [{
+        test: /\.tsx?$/,
+        use: [
+          'cache-loader',
+          'thread-loader',
+          {
+            loader: 'babel-loader',
+            options: Config.babel()
+          },
+          {
+            loader: 'ts-loader',
             options: {
-                appendTsSuffixTo: [/\.vue$/],
-                transpileOnly: true
+              appendTsSuffixTo: [/\.vue$/],
+              transpileOnly: true,
+              happyPackMode: true
             }
-        });
+          },
+        ],
+        exclude: /node_modules/,
+      }];
     }
 
     /**

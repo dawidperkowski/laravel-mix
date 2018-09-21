@@ -5,7 +5,7 @@ class Preact extends JavaScript {
      * Required dependencies for the component.
      */
     dependencies() {
-        return ['babel-preset-preact'].concat(super.dependencies());
+        return ['@babel/preset-react'].concat(super.dependencies());
     }
 
     /**
@@ -13,7 +13,7 @@ class Preact extends JavaScript {
      */
     babelConfig() {
         return {
-            presets: ['preact']
+            presets: ['@babel/preset-react']
         };
     }
 }

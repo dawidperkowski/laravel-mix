@@ -70,6 +70,7 @@ class JavaScript {
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     'cache-loader',
+                    'thread-loader',
                     {
                         loader: 'babel-loader',
                         options: Config.babel()
