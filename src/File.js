@@ -92,6 +92,12 @@ class File {
         return this.segments.pathWithoutExt;
     }
 
+    pathWithoutHash() {
+        const path = this.path().split('?');
+
+        return path[0] || path.join('');
+    }
+
     /**
      * Force the file's relative path to begin from the public path.
      *
@@ -160,7 +166,7 @@ class File {
      * Read the file's contents.
      */
     read() {
-        return fs.readFileSync(this.path(), {
+        return fs.readFileSync(this.pathWithoutHash(), {
             encoding: 'utf-8'
         });
     }
