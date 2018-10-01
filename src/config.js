@@ -19,6 +19,13 @@ module.exports = function() {
         customAssets: [],
 
         /**
+         * Determine if `fast-sass-loader` should be used instead `sass-loader`.
+         *
+         * @type {Boolean}
+         */
+        fastSassLoader: true,
+
+        /**
          * Determine if we should enable hot reloading.
          *
          * @type {Boolean}

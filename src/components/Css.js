@@ -5,6 +5,8 @@ class Css extends AutomaticComponent {
      * webpack rules to be appended to the master config.
      */
     webpackRules() {
+        const sassLoader = Config.fastSassLoader ? 'fast-sass-loader' : 'sass-loader';
+
         return [
             {
                 test: /\.css$/,
@@ -14,7 +16,7 @@ class Css extends AutomaticComponent {
             {
                 test: /\.s[ac]ss$/,
                 exclude: this.excludePathsFor('sass'),
-                loaders: ['cache-loader', 'style-loader', 'css-loader', 'sass-loader']
+                loaders: ['cache-loader', 'style-loader', 'css-loader', sassLoader]
             },
 
             {

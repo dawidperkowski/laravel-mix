@@ -88,8 +88,11 @@ class Preprocessor {
                     }
 
                     if (preprocessor.type !== 'postCss') {
+                        const sassLoader = Config.fastSassLoader ? 'fast-sass-loader' : 'sass-loader';
+                        const processorLoader = preprocessor.type === 'sass' ? sassLoader  : `${preprocessor.type}-loader`;
+
                         loaders.push({
-                            loader: `${preprocessor.type}-loader`,
+                            loader: processorLoader,
                             options: Object.assign(preprocessor.pluginOptions, {
                                 sourceMap:
                                     preprocessor.type === 'sass' &&

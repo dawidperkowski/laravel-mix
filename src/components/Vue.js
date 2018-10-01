@@ -73,7 +73,7 @@ class Vue {
         ]);
 
         let sassLoader = {
-            loader: 'sass-loader'
+            loader: Config.fastSassLoader ? 'fast-sass-loader' : 'sass-loader'
         };
 
         if (Config.globalVueStyles) {
